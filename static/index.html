@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stockroom - Inventory Manager</title>
+<style>
+:root{--bg:#eef2f1;--panel:#fff;--ink:#17262b;--mute:#5d6f74;--line:#d3dcdb;--accent:#0f6b63;--warn:#b4421f;--warnbg:#fbe9e2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,sans-serif}
+header{padding:20px 5vw;background:var(--accent);color:#fff;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+h1{margin:0;font-size:1.5rem}
+main{max-width:1100px;margin:0 auto;padding:20px 5vw;display:grid;gap:20px}
+section{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+h2{margin:0 0 12px;font-size:1.05rem}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}
+label{display:grid;gap:3px;font-size:.85rem;color:var(--mute)}
+input{padding:8px;border:1px solid var(--line);border-radius:4px;font:inherit;color:var(--ink)}
+input:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+button{padding:8px 14px;border:0;border-radius:4px;background:var(--accent);color:#fff;font:inherit;cursor:pointer}
+button.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+button.danger{background:var(--warn)}
+.tools{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.tools input{flex:1;min-width:200px}
+.wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--mute);font-weight:600;font-size:.85rem}
+tr.low{background:var(--warnbg)}
+.badge{color:var(--warn);font-weight:600;font-size:.8rem}
+td input{width:90px;padding:4px}
+td.act{display:flex;gap:6px}
+#msg{min-height:1.4em;margin:0 0 8px;font-weight:600}
+#msg.err{color:var(--warn)}#msg.ok{color:var(--accent)}
+#alerts{background:var(--warnbg);border-color:#e8b9a7;color:var(--warn)}
+.empty{text-align:center;color:var(--mute);padding:20px}
+</style>
+</head>
+<body>
+<header><h1>Stockroom</h1><span id="stats"></span></header>
+<main>
+<p id="msg" role="status"></p>
+<section id="alerts" hidden></section>
+<section>
+<h2>Add a product</h2>
+<form id="addForm">
+<label>Product ID<input name="product_id" required></label>
+<label>Name<input name="name" required></label>
+<label>Category<input name="category" required></label>
+<label>Quantity<input name="quantity" type="number" min="0" step="1" required></label>
+<label>Price (₹)<input name="price" type="number" min="0" step="0.01" required></label>
+<button>Add product</button>
+</form>
+</section>
+<section>
+<h2>Products</h2>
+<div class="tools"><input id="search" type="search" placeholder="Search by ID, name or category"></div>
+<div class="wrap"><table>
+<thead><tr><th>ID</th><th>Name</th><th>Category</th><th>Quantity</th><th>Price (₹)</th><th>Actions</th></tr></thead>
+<tbody id="rows"></tbody></table></div>
+</section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

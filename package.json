@@ -1,0 +1,9 @@
+{
+  "name": "inventory-management-system",
+  "version": "1.0.0",
+  "description": "Frontend tooling for the Flask inventory app",
+  "scripts": {
+    "start": "python app.py",
+    "lint": "npx --yes eslint static/app.js"
+  }
+}
